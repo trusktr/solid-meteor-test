@@ -3,6 +3,8 @@ import { ReactiveVar } from "meteor/reactive-var";
 
 import { createRoot, createEffect, createSignal } from "solid-js";
 
+import html from "solid-js/html";
+
 const [getCount, setCount] = createSignal(0);
 
 setInterval(() => {
@@ -13,6 +15,10 @@ createRoot(() => {
   createEffect(() => {
     console.log(getCount());
   });
+
+  const div = html` <div>The count is: ${getCount}</div> `;
+
+  document.body.appendChild(div);
 });
 
 import "./main.html";
