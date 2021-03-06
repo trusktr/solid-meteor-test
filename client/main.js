@@ -1,6 +1,20 @@
 import { Template } from "meteor/templating";
 import { ReactiveVar } from "meteor/reactive-var";
 
+import { createRoot, createEffect, createSignal } from "solid-js";
+
+const [getCount, setCount] = createSignal(0);
+
+setInterval(() => {
+  setCount(getCount() + 1);
+}, 1000);
+
+createRoot(() => {
+  createEffect(() => {
+    console.log(getCount());
+  });
+});
+
 import "./main.html";
 
 Template.hello.onCreated(function helloOnCreated() {
