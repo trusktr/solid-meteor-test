@@ -4,6 +4,7 @@ import { ReactiveVar } from "meteor/reactive-var";
 import { createRoot, createEffect, createSignal } from "solid-js";
 
 import html from "solid-js/html";
+import { For } from "solid-js/web";
 
 const [getCount, setCount] = createSignal(0);
 
@@ -16,7 +17,13 @@ createRoot(() => {
     console.log(getCount());
   });
 
-  const div = html` <div>The count is: ${getCount}</div> `;
+  const div = html`
+    <div>
+      <${For} each=${() => [0, 1, 2]}>
+        ${(n) => html` <span>The count is: ${getCount}</span> `}
+      <//>
+    </div>
+  `;
 
   document.body.appendChild(div);
 });
